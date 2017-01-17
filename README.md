@@ -1,5 +1,5 @@
 # Angular 1.x Form Validation #
-Exploring Angular 1.x validation methodologies.
+Exploring Angular 1.x validation options.
 - - - -
 
 Setps to build and run -
