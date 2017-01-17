@@ -1,0 +1,100 @@
+﻿<form name="newQuestionForm" novalidate>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add New Data Capture Field</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label>Message from the Demo Controller:</label>  {{$ctrl.message}}
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" ng-class="{ 'has-error' : newQuestionForm.labelText.$invalid && !newQuestionForm.labelText.$pristine || ($ctrl.submitted && newQuestionForm.labelText.$invalid)}">
+                    <label>Label Text</label>
+                    <input type="text" class="form-control" ng-model="$ctrl.NewDataCaptureField.LabelText" name="labelText" required />
+                    <div ng-messages="newQuestionForm.labelText.$error" ng-show="!newQuestionForm.labelText.$pristine || ($ctrl.submitted && newQuestionForm.labelText.$invalid)" class="help-block">
+                        <span ng-message="required">A label is required</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : newQuestionForm.helpText.$invalid && !newQuestionForm.helpText.$pristine || ($ctrl.submitted && newQuestionForm.helpText.$invalid) }">
+                    <label>Help Text</label>
+                    <input type="text" class="form-control" ng-model="$ctrl.NewDataCaptureField.HelpText" name="helpText" required />
+                    <div ng-messages="newQuestionForm.helpText.$error" ng-show="!newQuestionForm.helpText.$pristine || ($ctrl.submitted && newQuestionForm.helpText.$invalid)" class="help-block">
+                        <span ng-message="required">Help text is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Is Enabled?</label>
+                    <input type="checkbox" ng-model="$ctrl.NewDataCaptureField.IsEnabled" name="isEnabled" checked />
+                </div>
+                <div class="form-group">
+                    <label>Is Required?</label>
+                    <input type="checkbox" ng-model="$ctrl.NewDataCaptureField.IsRequired" name="isVisible" checked />
+                </div>
+                <div class="form-group">
+                    <label>Is Visible?</label>
+                    <input type="checkbox" ng-model="$ctrl.NewDataCaptureField.IsVisible" name="isVisible" checked />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default" ng-class="{ 'panel-danger' : ($ctrl.NewDataCaptureField.Mask == null && !newQuestionForm.inputMask.$pristine)
+                                                                    || ($ctrl.submitted && $ctrl.NewDataCaptureField.Mask == null) }">
+                    <div class="panel-heading">
+                        Input Masks
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <div ng-repeat="mask in $ctrl.Masks" class="row">
+                                <p style="float:left; margin-left: 20px">
+                                    {{$index}}) {{mask.Name}} - {{mask.Regex}}
+                                </p>
+                                <p style="float:right; margin-right: 20px">
+                                    <input type="radio" ng-model="$ctrl.NewDataCaptureField.Mask" value="{{mask}}" name="inputMask" required />
+                                </p>
+                                <br />
+                            </div>
+                            <div ng-messages="newQuestionForm.inputMask.$error" ng-show="newQuestionForm.inputMask.$touched" class="help-block">
+                                <span ng-message="required">An input mask is required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-show="newQuestionForm.$invalid && newQuestionForm.$submitted && $ctrl.submitted" class="alert alert-danger">
+                    <b> Please correct these fields and then try to create the question again:</b>
+                    <ul>
+                        <li data-ng-repeat="field in newQuestionForm" data-ng-if="newQuestionForm[field.$name].$invalid">
+                            <div>
+                                <!--{{ getValFieldName(field) }}-->
+                                <span data-ng-messages="newQuestionForm[field.$name].$error" role="alert">
+                                    The input in field {{newQuestionForm[field.$name].$name}} is incorrect!
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-success" type="submit" ng-click="$ctrl.AddNewField(newQuestionForm, false)">Add Field</button>
+        <button class="btn btn-primary" type="submit" ng-click="$ctrl.AddNewField(newQuestionForm, true)">Add Field and Close</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        <button class="btn btn-success pull-left" type="button" ng-click="showFormFields = true" ng-show="!showFormFields">Show Angular Form Fields</button>
+        <button class="btn btn-danger pull-left" type="button" ng-click="showFormFields = false" ng-show="showFormFields">Hide Angular Form Fields</button>
+    </div>
+
+    <div class="row" ng-show="showFormFields">
+        <div class="col-md-12">
+            <pre>
+        {{ newQuestionForm | json }}
+        </pre>
+        </div>
+    </div>
+</form>

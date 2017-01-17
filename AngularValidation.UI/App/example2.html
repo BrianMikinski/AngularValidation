@@ -1,0 +1,202 @@
+﻿<br />
+<div class="row well" ng-class="(dataEntryForm.$valid 
+                                        && vm.IsSecondaryFormValid 
+                                        && simpleValidationDirectiveForm.$valid
+                                        && DropDownValidationForm.$valid
+                                        && customValidationDirectiveForm.$valid
+                                        && asyncValidationDirectiveForm.$valid) ? 'alert-success' : 'alert-danger'">
+    <div class="col-md-12">
+        <h1 class="text-center">Form Status Bar</h1>
+        <h3 class="text-center alert alert-success" ng-show="(dataEntryForm.$valid 
+                                                                && vm.IsSecondaryFormValid 
+                                                                && simpleValidationDirectiveForm.$valid
+                                                                && DropDownValidationForm.$valid
+                                                                && customValidationDirectiveForm.$valid
+                                                                && asyncValidationDirectiveForm.$valid)">
+            All forms are valid!
+        </h3>
+        <h3 class="text-center alert alert-danger" ng-show="!(dataEntryForm.$valid 
+                                                                && vm.IsSecondaryFormValid 
+                                                                && simpleValidationDirectiveForm.$valid
+                                                                && DropDownValidationForm.$valid
+                                                                && customValidationDirectiveForm.$valid
+                                                                && asyncValidationDirectiveForm.$valid)">
+            All forms are not valid...
+        </h3>
+    </div>
+    <br />
+    <div class="col-md-4 alert text-center" ng-class="dataEntryForm.$valid ? 'alert-success' : 'alert-danger'">
+        <p><b>Data Capture Form Status:</b> {{dataEntryForm.$valid}}</p>
+    </div>
+    <div class="col-md-4 alert text-center" ng-class="vm.IsSecondaryFormValid ? 'alert-success' : 'alert-danger'">
+        <p><b>Boolean Form Status:</b> {{BooleanValidationFrom.$valid}}</p>
+    </div>
+    <div class="col-md-4 alert text-center" ng-class="DropDownValidationForm.$valid ? 'alert-success' : 'alert-danger'">
+        <p><b>Drop Down Selection Form Status:</b> {{DropDownValidationForm.$valid}}</p>
+    </div>
+    <div class="col-md-4 alert text-center" ng-class="simpleValidationDirectiveForm.$valid ? 'alert-success' : 'alert-danger'">
+        <p><b>Simple Validator Directive Form Status:</b> {{simpleValidationDirectiveForm.$valid}}</p>
+    </div>
+    <div class="col-md-4 alert text-center" ng-class="customValidationDirectiveForm.$valid ? 'alert-success' : 'alert-danger'">
+        <p><b>Rule Validator Directive Form Status:</b> {{customValidationDirectiveForm.$valid}}</p>
+    </div>
+    <div class="col-md-4 alert text-center" ng-class="asyncValidationDirectiveForm.$valid ? 'alert-success' : 'alert-danger'">
+        <p><b>Async Validator Directive Form Status:</b> {{asyncValidationDirectiveForm.$valid}}</p>
+    </div>
+
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel" ng-class="dataEntryForm.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">Data Capture Form</div>
+            <div class="panel-body">
+                <form class="form-horizontal" name="dataEntryForm">
+                    <div ng-repeat="field in vm.FormFields">
+                        <div class="form-group" ng-hide="field.IsVisible == false || vm.HideAll == true">
+                            <label class="col-sm-4 control-label">{{field.LabelText}}</label>
+                            <div class="col-sm-8">
+                                <input class="form-control"
+                                       name="fieldCaptureForm_{{$index}}"
+                                       ng-readonly="!field.IsEnabled || !vm.IsFormEnabled"
+                                       ng-show="field.IsVisible"
+                                       ng-required="true"
+                                       ng-model="field.Value"
+                                       ui-mask="{{field.Mask.Regex}}"
+                                       ui-mask-placeholder
+                                       ui-mask-placeholder-char="_"
+                                       ui-mask-allowInvalidValue="{{field.Mask.Regex.AllowInvalidValue}}" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel" ng-class="BooleanValidationFrom.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">
+                Boolean Form
+            </div>
+            <div class="panel-body">
+                <form name="BooleanValidationFrom">
+                    <label class="control-label">Is Boolean Form Valid: </label>
+                    <input type="checkbox" checked="checked" name="isValid" ng-required="true" ng-model="vm.IsSecondaryFormValid" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel" ng-class="DropDownValidationForm.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">
+                Drop Down Selection Form
+            </div>
+            <div class="panel-body">
+                <form name="DropDownValidationForm">
+                    <div class="form-group">
+                        <label>Please Select a Zip Code: </label>
+                        <select class="form-control"
+                                name="selectedZipCode"
+                                ng-model="vm.SelectedZipCode"
+                                ng-options="item as (item.ZipCode + '- ' + item.City +'(' + item.County + '), ' + item.State) for item in vm.ZipCodes"
+                                ng-required="vm.IsZipCodeRequired"
+                                ng-readonly="!vm.IsZipCodeRequired"></select>
+                        <br />
+
+                        <label>You selected:</label>
+                        <p ng-show="vm.SelectedZipCode != null">
+                            {{vm.SelectedZipCode.ZipCode}} - {{vm.SelectedZipCode.City}}({{vm.SelectedZipCode.County}}), {{vm.SelectedZipCode.State}}
+                        </p>
+                    </div>
+                    <div class="form-group">
+
+                        <button class="form-control btn btn-primary" type="button" ng-click="vm.SelectedZipCode = null">
+                            Clear Selection
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>Is Zip Code Required?</label>
+                        <input type="checkbox" ng-model="vm.IsZipCodeRequired" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel" ng-class="simpleValidationDirectiveForm.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">
+                Simple Validator Directive Form
+            </div>
+            <div class="panel-body">
+                <form name="simpleValidationDirectiveForm">
+                    <div class="form-group">
+                        <label>Enter the form code pass code (Hint: "code pass")</label>
+                        <input type="text"
+                               class="form-control"
+                               name="formPassCode"
+                               ng-required="true"
+                               ng-model="vm.simpleValidationDirectiveFormPassCode"
+                               simple-validation/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel" ng-class="customValidationDirectiveForm.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">
+                Custom Validator Directive Form
+            </div>
+            <div class="panel-body">
+                <form name="customValidationDirectiveForm">
+                    <div class="form-group">
+                        <label>
+                            Enter the validation code to check with custom rules
+                            (Hint: string must contain "{{vm.CustomValidationRules[0].Value}}" and "{{vm.CustomValidationRules[1].Value}}")
+                        </label>
+                        <br />
+                        <input type="text"
+                               class="form-control"
+                               name="customValidationRulesCode"
+                               ng-required="true"
+                               ng-model="vm.CustomValidationPassCode"
+                               custom-validation
+                               rules="vm.CustomValidationRules" />
+                    </div>
+                    <div class="form-group">
+                        <button class="form-control btn btn-primary" ng-click="vm.ToggleValidationRules()">
+                            Toggle Validation Rules
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel" ng-class="asyncValidationDirectiveForm.$valid ? 'panel-success' : 'panel-danger'">
+            <div class="panel-heading">
+                Async Validation Directive Form
+            </div>
+            <div class="panel-body">
+                <form name="asyncValidationDirectiveForm">
+                    <div class="form-group">
+                        <label>Enter the validation code to check on the server (Hint: "asyncPassCode")</label>
+                        <br />
+                        <input type="text"
+                               class="form-control"
+                               name="asyncServerPassCode"
+                               ng-model="vm.AsyncValidationPassCode"
+                               ng-required="true"
+                               async-validation />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

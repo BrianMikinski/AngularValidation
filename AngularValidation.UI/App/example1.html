@@ -1,0 +1,80 @@
+﻿<div class="row">
+    <br />
+    <form name="dataCaptureCommands">
+        <div class="col-md-8">
+            <h1> Data Capture Form Fields</h1>
+        </div>
+        <div class="col-md-4 pull-right">
+            <label>Message for the Modal Controller:</label>
+            <input class="form-control" ng-model="vm.MessageFromDemoController" />
+            <br />
+            <button type="button" class="btn btn-success form-control demo-controls-label" ng-click="vm.open('lg')">
+                Add Question (Open Modal)
+            </button>
+            <hr />
+            <br />
+            <label class="btn btn-primary form-control demo-controls-label">
+                Enable all input elements? <input type="checkbox" 
+                                                  class="demo-controls-label" 
+                                                  ng-model="vm.IsFormEnabled" 
+                                                  ng-checked="vm.IsFormEnabled" />
+            </label>
+            <hr />
+            <br />
+            <label class="btn btn-primary form-control demo-controls-label">
+               Hide all question elements? <input type="checkbox"
+                                                  class="demo-controls-label"
+                                                  ng-model="vm.HideAll"
+                                                  ng-checked="vm.HideAll" />
+            </label>
+            <br />
+        </div>
+    </form>
+</div>
+<br />
+<div class="modal-demo"></div>
+<hr />
+<div class="row">
+    <div ng-repeat="field in vm.FormFields">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span>Question {{$index +1 }}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>{{$index + 1}}. {{field.LabelText}} <i>(With Mask)</i></label>
+                        <input class="form-control"
+                               type="text"
+                               ng-model="field.Value"
+                               ng-readonly="!field.IsEnabled || !vm.IsFormEnabled"
+                               ui-mask="{{field.Mask.Regex}}"
+                               ui-mask-placeholder
+                               ui-mask-placeholder-char="_"
+                               ui-mask-allowInvalidValue="{{field.Mask.Regex.AllowInvalidValue}}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mask</label>
+                        <input class="form-control" type="text" readonly ng-model="field.Mask.Regex" />
+                    </div>
+                    <div class="form-group">
+                        <label>"{{field.LabelText}}" Value <i>(Without Mask)</i></label>
+                        <input class="form-control" type="text" readonly ng-model="field.Value" />
+                    </div>
+                    <div class="form-group">
+                        <label class="btn btn-primary">
+                            Is enabled?
+                            <input type="checkbox" ng-model="field.IsEnabled" ng-checked="field.IsEnabled" />
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="btn btn-primary">
+                            Is Visible?
+                            <input type="checkbox" ng-model="field.IsVisible" ng-checked="field.IsVisible" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
