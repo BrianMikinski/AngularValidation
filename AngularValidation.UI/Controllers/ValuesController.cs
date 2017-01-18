@@ -1,5 +1,5 @@
-﻿using AngularTest.Domain;
-using AngularTest.Models;
+﻿using AngularValidation.Domain;
+using AngularValidation.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -17,7 +17,7 @@ namespace AngularTest.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route(nameof(ValuesController.RetreiveFieldValues))]
-        public List<FieldViewModel> RetreiveFieldValues()
+        public List<DataCaptureField> RetreiveFieldValues()
         {
             return _questionService.RetrieveQuesitons();
         }

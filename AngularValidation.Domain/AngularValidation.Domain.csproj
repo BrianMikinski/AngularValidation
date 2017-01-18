@@ -7,8 +7,8 @@
     <ProjectGuid>{86C2F433-2F52-49CE-A5A5-700D76B3A421}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AngularTest.Domain</RootNamespace>
-    <AssemblyName>AngularTest.Domain</AssemblyName>
+    <RootNamespace>AngularValidation.Domain</RootNamespace>
+    <AssemblyName>AngularValidation.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataCaptureService.cs" />
+    <Compile Include="IDataCaptureService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

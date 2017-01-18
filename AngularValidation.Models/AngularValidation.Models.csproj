@@ -7,8 +7,8 @@
     <ProjectGuid>{1AFEC3F3-0CC5-4BEA-9CF1-DB802853AB1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AngularTest.Models</RootNamespace>
-    <AssemblyName>AngularTest.Models</AssemblyName>
+    <RootNamespace>AngularValidation.Models</RootNamespace>
+    <AssemblyName>AngularValidation.Models</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FieldRegex.cs" />
-    <Compile Include="FieldViewModel.cs" />
+    <Compile Include="FieldMask.cs" />
+    <Compile Include="DataCaptureField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
