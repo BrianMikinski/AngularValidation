@@ -4,7 +4,7 @@ Exploring Angular 1.x validation using a .Net 4.5 backend. Repo contains example
 ----
 
 ### Build and Run ###
-Project requires Visual Studio 2015. Use the following steps to build and run -
+Project requires Visual Studio 2015 and [TypeScript 2.1](https://www.microsoft.com/en-us/download/details.aspx?id=48593). Use the following steps to build and run -
 
 1. npm install
 2. nuget restore 
