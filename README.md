@@ -1,5 +1,5 @@
 # Angular 1.x Form Validation #
-Exploring Angular 1.x validation using a .Net 4.5 backend. Repo contains examples of the angular-ui-mask library, standard angular form validation and custom angular directive validation.
+Exploring Angular 1.x validation using a .Net 4.5 backend. Repo contains examples of the angular-ui-mask library, standard angular form validation and custom Angular directive validation.
 
 ----
 
