@@ -1,17 +1,18 @@
 # Angular 1.x Form Validation #
-Exploring Angular 1.x validation options. Repo contains examples of the angular-ui-mask library, standard angular form validation and custom angular directive validation
+Exploring Angular 1.x validation options using a .Net 4.5 backend. Repo contains examples of the angular-ui-mask library, standard angular form validation and custom angular directive validation.
 
 ----
 
-### Setps to build and run ###
+### Build and Run ###
+Project requires Visual Studio 2015. Use the following steps to build and run -
 
 1. npm install
-2. nuget restore
+2. nuget restore 
 3. F5
 
 ----
 ### Angular-UI-Mask ###
-Look at the angular-ui-mask library that can be found at https://github.com/angular-ui/ui-mask
+POC of the angular-ui-mask library that can be found at https://github.com/angular-ui/ui-mask
 
 ----
 ### Standard Form Validation ###
