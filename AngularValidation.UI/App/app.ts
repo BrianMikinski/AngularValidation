@@ -86,7 +86,7 @@ app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.b
     /**
      * Create mock data capture questions
      */
-    function GenerateDataCaptureSource() {
+    function GenerateDataCaptureSource():void {
 
         $http.get("./values/RetrieveDataCaptureQuestions")
             .success(function (data: Array<any>) {
@@ -99,38 +99,6 @@ app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.b
                 console.log(`msg: ${msg}`)
                 console.log(`code: ${code}`)
             });
-
-        let formFieldOne: DataCaptureField =
-            {
-                LabelText: "Spouse First Name",
-                HelpText: "You must enter the first name of your spouse.",
-                Value: "",
-                IsEnabled: true,
-                IsRequired: true,
-                IsVisible: true,
-                Mask: {
-                    Regex: 'AAAAA',
-                    AllowInvalidValue: false,
-                    Name: "Alphabetic"
-                }
-            };
-
-        let formFieldTwo: DataCaptureField = {
-            LabelText: "Last Name",
-            HelpText: "You must enter a last name.",
-            Value: "",
-            IsEnabled: true,
-            IsRequired: true,
-            IsVisible: true,
-            Mask: {
-                Regex: 'AAAAA',
-                AllowInvalidValue: false,
-                Name: "Alphabetic"
-            }
-        };
-
-        vm.FormFields.push(formFieldTwo);
-        vm.FormFields.push(formFieldOne);
     }
 
     /**
@@ -202,14 +170,16 @@ app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.b
 
 //Controller for the modal popover
 angular.module('app').controller('ModalInstanceCtrl', function ($scope: ng.IScope, $rootScope: ng.IRootScopeService,
-    $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, currentFormItems: Array<DataCaptureField>, message: string) {
+    $uibModalInstance: ng.ui.bootstrap.IModalServiceInstance, currentFormItems: Array<DataCaptureField>, message: string, $http: ng.IHttpService) {
 
     var $ctrl = this;
     $ctrl.currentFormItems = currentFormItems;
     $ctrl.message = message;
     $ctrl.submitted = false;
 
-    $ctrl.Masks = GenerateMasks();
+    $ctrl.Masks = new Array<IFieldMask>();
+
+    GenerateMasks();
 
     //Data capture fields
     $ctrl.NewDataCaptureField = new DataCaptureField();
@@ -252,40 +222,21 @@ angular.module('app').controller('ModalInstanceCtrl', function ($scope: ng.IScop
     /**
      * Generate a set of masks that can be used to add questions
      */
-    function GenerateMasks(): Array<IFieldMask> {
+    function GenerateMasks(): void {
 
         let masks = new Array<IFieldMask>();
 
-        let mask1: IFieldMask = {
-            AllowInvalidValue: false,
-            Name: "Three Numbers",
-            Regex: "9-9-9"
-        };
+        $http.get("./values/RetrieveFieldMasks")
+            .success(function (data: Array<any>) {
 
-        let mask2: IFieldMask = {
-            AllowInvalidValue: false,
-            Name: "North American Phone Number",
-            Regex: "(999)-999-9999",
-        };
+                for (let i = 0; i < data.length; i++) {
+                    $ctrl.Masks.push(data[i]);
+                }
 
-        let mask3: IFieldMask = {
-            AllowInvalidValue: false,
-            Name: "Alpha Numeric",
-            Regex: "[a-zA-Z0-9]"
-        };
-
-        let mask4: IFieldMask = {
-            AllowInvalidValue: false,
-            Name: "English Alphabet",
-            Regex: "AAAAA"
-        };
-
-        masks.push(mask4);
-        masks.push(mask3);
-        masks.push(mask2);
-        masks.push(mask1);
-
-        return masks;
+            }).error(function (msg, code) {
+                console.log(`msg: ${msg}`)
+                console.log(`code: ${code}`)
+            });
     }
 });
 
