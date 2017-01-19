@@ -9,17 +9,35 @@ namespace AngularTest.Controllers
     [AllowAnonymous]
     public class ValuesController : ApiController
     {
-        private readonly IDataCaptureService _questionService;
         private const string ASYNC_PASS_CODE = "asyncPassCode";
+        private readonly IDataCaptureService _dataCaptureService;
+
+        /// <summary>
+        /// Setup for dependency injection if required
+        /// </summary>
+        public ValuesController()
+        {
+            _dataCaptureService = new DataCaptureService();
+        }
 
         /// <summary>
         /// Return a list of fields for the specified bond
         /// </summary>
         /// <returns></returns>
-        [HttpPost, Route(nameof(ValuesController.RetreiveFieldValues))]
-        public List<DataCaptureField> RetreiveFieldValues()
+        [HttpGet, Route(nameof(ValuesController.RetrieveDataCaptureQuestions))]
+        public List<DataCaptureField> RetrieveDataCaptureQuestions()
         {
-            return _questionService.RetrieveQuesitons();
+            return _dataCaptureService.RetrieveQuesitons();
+        }
+
+        /// <summary>
+        /// Retrieve the list of potential input masks
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route(nameof(ValuesController.RetrieveFieldMasks))]
+        public List<FieldMask> RetrieveFieldMasks()
+        {
+            return _dataCaptureService.RetrieveMasks();
         }
 
         /// <summary>

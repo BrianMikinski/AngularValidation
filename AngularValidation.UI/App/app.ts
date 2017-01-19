@@ -4,7 +4,7 @@
 var app = angular.module('app', ['ui.mask', 'ui.bootstrap', 'ngMessages']);
 
 //Main controller for the page
-app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.bootstrap.IModalService, $document: ng.IDocumentService) {
+app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.bootstrap.IModalService, $document: ng.IDocumentService, $http: ng.IHttpService) {
 
     var vm: any = this;
 
@@ -87,6 +87,18 @@ app.controller("demoController", function ($scope: ng.IScope, $uibModal: ng.ui.b
      * Create mock data capture questions
      */
     function GenerateDataCaptureSource() {
+
+        $http.get("./values/RetrieveDataCaptureQuestions")
+            .success(function (data: Array<any>) {
+
+                for (let i = 0; i < data.length; i++) {
+                    vm.FormFields.push(data[i]);
+                }
+
+            }).error(function (msg, code) {
+                console.log(`msg: ${msg}`)
+                console.log(`code: ${code}`)
+            });
 
         let formFieldOne: DataCaptureField =
             {

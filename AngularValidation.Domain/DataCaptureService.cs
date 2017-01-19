@@ -5,9 +5,8 @@ namespace AngularValidation.Domain
 {
     public class DataCaptureService : IDataCaptureService
     {
-        private readonly FieldMask _threeNumbers,  _NorthAmericanPhone, _AlphaNumeric, _EnglishAlphabet, _SSN;
         private readonly List<FieldMask> _fieldMasks = new List<FieldMask>();
-
+        private readonly FieldMask _threeNumbers, _NorthAmericanPhone, _AlphaNumeric, _EnglishAlphabet, _SSN;
         public DataCaptureService()
         {
             _threeNumbers = new FieldMask()
@@ -52,6 +51,11 @@ namespace AngularValidation.Domain
             _fieldMasks.Add(_SSN);
         }
 
+        public List<FieldMask> RetrieveMasks()
+        {
+            return _fieldMasks;
+        }
+
         public List<DataCaptureField> RetrieveQuesitons()
         {
             return new List<DataCaptureField>() {
@@ -60,8 +64,9 @@ namespace AngularValidation.Domain
                     LabelText = "Spouse Name",
                     HelpText = "You must select a spouse",
                     Value = "",
-                    IsEnabled = false,
-                    IsRequired = false,
+                    IsEnabled = true,
+                    IsRequired = true,
+                    IsVisible = true,
                     Mask = _EnglishAlphabet
                 },
                 new DataCaptureField()
@@ -69,8 +74,9 @@ namespace AngularValidation.Domain
                     LabelText = "First Name",
                     HelpText = "You must enter a first name",
                     Value = "",
-                    IsEnabled = false,
-                    IsRequired = false,
+                    IsEnabled = true,
+                    IsRequired = true,
+                    IsVisible = true,
                     Mask = _EnglishAlphabet
                 },
                 new DataCaptureField()
@@ -78,8 +84,9 @@ namespace AngularValidation.Domain
                     LabelText = "Last Name",
                     HelpText = "You must enter a first name",
                     Value = "",
-                    IsEnabled = false,
-                    IsRequired = false,
+                    IsEnabled = true,
+                    IsRequired = true,
+                    IsVisible = true,
                     Mask = _EnglishAlphabet
                 },
                 new DataCaptureField()
@@ -87,8 +94,9 @@ namespace AngularValidation.Domain
                     LabelText = "SSN",
                     HelpText = "You must enter a Social Security Number",
                     Value = "",
-                    IsEnabled = false,
-                    IsRequired = false,
+                    IsEnabled = true,
+                    IsRequired = true,
+                    IsVisible = true,
                     Mask = _SSN
                 },
                 new DataCaptureField()
@@ -96,16 +104,12 @@ namespace AngularValidation.Domain
                     LabelText = "Phone Number",
                     HelpText = "You must enter a phone number",
                     Value = "",
-                    IsEnabled = false,
-                    IsRequired = false,
+                    IsEnabled = true,
+                    IsRequired = true,
+                    IsVisible = true,
                     Mask = _NorthAmericanPhone
                 }
             };
-        }
-
-        public List<FieldMask> RetrieveMasks()
-        {
-            return _fieldMasks;
         }
     }
 }

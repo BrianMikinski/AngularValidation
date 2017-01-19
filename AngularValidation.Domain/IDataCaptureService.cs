@@ -5,8 +5,8 @@ namespace AngularValidation.Domain
 {
     public interface IDataCaptureService
     {
-        List<DataCaptureField> RetrieveQuesitons();
-
         List<FieldMask> RetrieveMasks();
+
+        List<DataCaptureField> RetrieveQuesitons();
     }
 }
