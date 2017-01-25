@@ -1,10 +1,9 @@
 ﻿using Microsoft.Owin;
-using Newtonsoft.Json.Serialization;
 using Owin;
 using System.Web.Http;
 
-[assembly: OwinStartup(typeof(AngularTest.Startup))]
-namespace AngularTest
+[assembly: OwinStartup(typeof(AngularValidation.UI.Startup))]
+namespace AngularValidation.UI
 {
     public class Startup
     {

@@ -3,7 +3,7 @@ using AngularValidation.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace AngularTest.Controllers
+namespace AngularValidation.UI.Controllers
 {
     [RoutePrefix("Values")]
     [AllowAnonymous]
